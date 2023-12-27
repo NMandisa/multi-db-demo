@@ -1,9 +1,7 @@
 package za.co.squnga.entity;
 
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @author Noxolo.Mkhungo
