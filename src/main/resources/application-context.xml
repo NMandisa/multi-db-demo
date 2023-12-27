@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ Copyright (c) 2023. ~ Author : Noxolo.Mkhungo | +27(0)71 741 6469 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa
+    https://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:./application.properties"/>
+    <context:annotation-config />
+
+    <context:component-scan base-package="za.co.squnga.repository">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+    </context:component-scan>
+
+    <context:component-scan base-package="za.co.sodi.repository">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+    </context:component-scan>
+
+    <jpa:repositories base-package="za.co.sodi.repository" entity-manager-factory-ref="entityManagerFactory2" transaction-manager-ref="transactionManager2"/>
+    <jpa:repositories base-package="za.co.squnga.repository" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"  destroy-method="close">
+        <constructor-arg ref="hikariConfig" />
+    </bean>
+
+    <bean id="dataSource2" class="com.zaxxer.hikari.HikariDataSource"  destroy-method="close">
+        <constructor-arg ref="hikariConfig2" />
+    </bean>
+
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="poolName" value="${hikari.config.poolName}" />
+        <property name="connectionTestQuery" value="${hikari.config.connectionTestQuery}" />
+        <property name="dataSourceClassName" value="${hikari.config.dataSourceClassName}" />
+        <property name="autoCommit" value="false"/>
+        <property name="maximumPoolSize" value="${hikari.config.maximumPoolSize}" />
+        <property name="minimumIdle" value="${hikari.config.minimumIdle}"/>
+        <property name="idleTimeout" value="${hikari.config.idleTimeout}"/>
+        <property name="connectionTimeout" value="${hikari.config.connection-timeout}"/>
+        <property name="transactionIsolation" value="${hikari.config.transactionIsolation}"/>
+        <!--<property name="isolateInternalQueries" value=""/>
+        <property name="leakDetectionThreshold" value=""/>
+        <property name="allowPoolSuspension" value=""/>
+        <property name="healthCheckRegistry" value=""/>
+        <property name="connectionInitSql" value=""/>
+        <property name="initializationFailTimeout" value=""/>-->
+        <!--<property name="threadFactory" value="" />-->
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url">${hikari.config.dataSource.url}</prop>
+                <prop key="user">${hikari.config.dataSource.user}</prop>
+                <prop key="password">${hikari.config.dataSource.password}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hikariConfig2" class="com.zaxxer.hikari.HikariConfig">
+        <property name="poolName" value="${hikari.config.sodi.poolName}" />
+        <property name="connectionTestQuery" value="${hikari.config.connectionTestQuery}" />
+        <property name="dataSourceClassName" value="${hikari.config.dataSourceClassName}" />
+        <property name="autoCommit" value="false"/>
+        <property name="maximumPoolSize" value="${hikari.config.maximumPoolSize}" />
+        <property name="minimumIdle" value="${hikari.config.minimumIdle}"/>
+        <property name="idleTimeout" value="${hikari.config.idleTimeout}"/>
+        <property name="connectionTimeout" value="${hikari.config.connection-timeout}"/>
+        <property name="transactionIsolation" value="${hikari.config.transactionIsolation}"/>
+        <!--<property name="isolateInternalQueries" value=""/>
+        <property name="leakDetectionThreshold" value=""/>
+        <property name="allowPoolSuspension" value=""/>
+        <property name="healthCheckRegistry" value=""/>
+        <property name="connectionInitSql" value=""/>
+        <property name="initializationFailTimeout" value=""/>-->
+        <!--<property name="threadFactory" value="" />-->
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url">${hikari.config.sodi.dataSource.url}</prop>
+                <prop key="user">${hikari.config.dataSource.user}</prop>
+                <prop key="password">${hikari.config.dataSource.password}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="za.co.squnga.entity" />
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="jpa.show_sql">true</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.dialect.storage_engine">${hibernate.dialect.storage_engine}</prop>
+                <prop key="hibernate.id.new_generator_mapping">${hibernate.id.new_generator_mapping}</prop>
+                <prop key="hibernate.hikari.dataSource.connection.provider_class">${hibernate.connection.provider_class}</prop>
+                <prop key="hibernate.hikari.dataSource.lock_resolution">LOCK_RESOLUTION_NO_WAIT</prop>
+                <prop key="hibernate.hikari.dataSource.version_acknowledgement">IGNORE_UNCOMMITTED_RECORD_VERSIONS_ON_READ</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="entityManagerFactory2" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource2" />
+        <property name="packagesToScan" value="za.co.sodi.entity" />
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="jpa.show_sql">true</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.dialect.storage_engine">${hibernate.dialect.storage_engine}</prop>
+                <prop key="hibernate.id.new_generator_mapping">${hibernate.id.new_generator_mapping}</prop>
+                <prop key="hibernate.hikari.dataSource.connection.provider_class">${hibernate.connection.provider_class}</prop>
+                <prop key="hibernate.hikari.dataSource.lock_resolution">LOCK_RESOLUTION_NO_WAIT</prop>
+                <prop key="hibernate.hikari.dataSource.version_acknowledgement">IGNORE_UNCOMMITTED_RECORD_VERSIONS_ON_READ</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <bean id="transactionManager2" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory2" />
+    </bean>
+
+    <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+</beans>
