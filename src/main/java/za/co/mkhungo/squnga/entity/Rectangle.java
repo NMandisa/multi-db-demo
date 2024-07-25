@@ -1,6 +1,8 @@
-package za.co.squnga.entity;
+package za.co.mkhungo.squnga.entity;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.*;
 
 /**
@@ -8,8 +10,9 @@ import lombok.*;
  */
 @Setter
 @Getter
-@RequiredArgsConstructor
 @Entity
+@DiscriminatorValue("rectagle_shape")
+@Table(schema = "multi_db")
 public class Rectangle extends Shape {
     @Override
     public Shape getShape(Shape shape) {

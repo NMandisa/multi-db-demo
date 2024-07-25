@@ -1,4 +1,4 @@
-package za.co.squnga.entity;
+package za.co.mkhungo.squnga.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,8 +8,9 @@ import lombok.*;
  */
 @Setter
 @Getter
-@RequiredArgsConstructor
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,name = "shape_type")
 public abstract class Shape {
 
     @Id

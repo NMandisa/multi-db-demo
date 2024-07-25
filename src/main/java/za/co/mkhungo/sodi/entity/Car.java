@@ -1,4 +1,4 @@
-package za.co.sodi.entity;
+package za.co.mkhungo.sodi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,8 +8,9 @@ import lombok.*;
  */
 @Setter
 @Getter
-@RequiredArgsConstructor
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,name = "car_type")
 public abstract class Car {
 
     @Id

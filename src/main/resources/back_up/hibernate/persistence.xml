@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="shape-persistence" transaction-type="RESOURCE_LOCAL">
+        <description>ContainerManagedJPA</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="hibernate.generate_statistics" value="true"/>
+            <property name="hibernate.session_factory_name" value="multi-db-session-factory"/>
+            <property name="show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="car-persistence" transaction-type="RESOURCE_LOCAL">
+        <description>ContainerManagedJPA</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="hibernate.generate_statistics" value="true"/>
+            <property name="show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <!--<property name="hibernate.session_factory_name" value="multi-db-session-factory"/>-->
+        </properties>
+    </persistence-unit>
+</persistence>
