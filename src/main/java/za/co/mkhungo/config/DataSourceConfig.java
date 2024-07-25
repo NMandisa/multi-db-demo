@@ -22,14 +22,14 @@ public class DataSourceConfig {
 
     @Bean(name = "dataSource")
     @Primary
-    public HikariDataSource dataSource(@Qualifier("dataSource") HikariConfig hikariConfig) {
+    public HikariDataSource dataSource(@Qualifier("hikariConfig") HikariConfig hikariConfig) {
         //HikariDataSource dataSource = new HikariDataSource(hikariConfig);
         //dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
         return new HikariDataSource(hikariConfig);
     }
 
     @Bean(name = "dataSource2")
-    public HikariDataSource dataSource2(@Qualifier("dataSource") HikariConfig hikariConfig) {
+    public HikariDataSource dataSource2(@Qualifier("hikariConfig2") HikariConfig hikariConfig) {
         return new HikariDataSource(hikariConfig);
     }
 
