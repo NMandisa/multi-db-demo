@@ -15,7 +15,7 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:./application.properties"/>
+    <context:property-placeholder location="classpath:multi-db.properties"/>
     <context:annotation-config />
     <context:component-scan base-package="za.co.mkhungo"/>
 
@@ -140,5 +140,12 @@
     </bean>
 
     <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+    <!-- Define profiles -->
+    <beans profile="dev">
+        <context:property-placeholder location="dev/multi-db-dev.properties"/>
+    </beans>
 
+    <beans profile="prod">
+        <context:property-placeholder location="classpath:prod/multi-db-prod.properties"/>
+    </beans>
 </beans>
