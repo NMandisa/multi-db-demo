@@ -1,4 +1,4 @@
-package za.co.mkhungo.sodi.repository;
+package za.co.mkhungo.squnga.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import za.co.mkhungo.sodi.entity.Hatchback;
+import za.co.mkhungo.sodi.repository.HatchbackRepository;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**

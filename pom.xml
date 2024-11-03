@@ -251,6 +251,44 @@
       <scope>runtime</scope>
     </dependency>
     <!--END Logging dependency-->
+
+    <!-- END TEST DEPENDENCY !-->
+    <!-- JUnit 5 -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Mockito -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>4.1.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+    <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>4.1.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Spring Test -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>5.3.13</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- END TEST DEPENDENCY !-->
   </dependencies>
 
   <build>
@@ -291,7 +329,7 @@
     <developer>
       <id>NMMkhungo</id>
       <name>Noxolo Mkhungo</name>
-      <email>noxolomandisamkhungo@gmail.com</email>
+      <email>Npxolo@Mkhungo.com</email>
       <timezone>+2</timezone>
     </developer>
   </developers>
